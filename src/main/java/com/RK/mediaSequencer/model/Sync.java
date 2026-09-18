@@ -17,8 +17,8 @@ public class Sync {
     private Long id = 1L;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "window_id")
-    private DisplayWindow displayWindow;
+    @JoinColumn(name = "media_id")
+    private Media media;
 
     @Column(nullable = false)
     private boolean active;
