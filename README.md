@@ -28,8 +28,8 @@ Controllers:
 ### Windows
 
 - `GET /api/windows` — Fetch all configured display windows.
-- `GET /api/windows/{windowId}/playlist` — Fetch the playlist configured for a specific window.
-- `POST /api/windows/{windowId}/playlist` — Add media to a specific window's playlist.
+- `GET /api/windows/{id}/playlist` — Fetch the playlist configured for a specific window.
+- `POST /api/windows/{id}/playlist` — Add media to a specific window's playlist.
 
 ### Sync
 
@@ -40,7 +40,7 @@ Controllers:
 
 - `SockJS /ws` — Establish a real-time WebSocket connection.
 - `/topic/sync` — Broadcast synchronization events to all connected windows.
-- `/topic/window/{windowId}/playlist` — Broadcast playlist updates to a specific window.
+- `/topic/window/{id}/playlist` — Broadcast playlist updates to a specific window.
 
 ### Key Features
 
