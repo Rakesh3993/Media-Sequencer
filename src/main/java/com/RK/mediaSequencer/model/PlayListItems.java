@@ -27,12 +27,12 @@ public class PlayListItems {
     private Integer position;
 
     @Column(nullable = false)
-    private Long durationInMs;
+    private Long durationMs;
 
-    public PlayListItems(DisplayWindow displayWindow, Media media, Integer position, Long durationInMs) {
+    public PlayListItems(DisplayWindow displayWindow, Media media, Integer position, Long durationMs) {
         this.window = displayWindow;
         this.media = media;
         this.position = position;
-        this.durationInMs = durationInMs;
+        this.durationMs = durationMs;
     }
 }

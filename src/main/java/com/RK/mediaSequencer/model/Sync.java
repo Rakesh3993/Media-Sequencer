@@ -24,8 +24,8 @@ public class Sync {
     private boolean active;
 
     @Column(nullable = false)
-    private Long startAt;
+    private Long startedAtEpochMs;
 
     @Column(nullable = false)
-    private Long endAt;
+    private Long endsAtEpochMs;
 }

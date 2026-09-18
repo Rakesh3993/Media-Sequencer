@@ -11,6 +11,6 @@ import lombok.NoArgsConstructor;
 public class SyncResponse {
     private boolean active;
     private Media media;
-    private Long startAt;
-    private Long endAt;
+    private Long startedAtEpochMs;
+    private Long endsAtEpochMs;
 }

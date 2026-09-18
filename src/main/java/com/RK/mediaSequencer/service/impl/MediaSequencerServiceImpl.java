@@ -14,6 +14,7 @@ import com.RK.mediaSequencer.repository.SyncRepository;
 import com.RK.mediaSequencer.service.MediaSequencerService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -26,6 +27,7 @@ public class MediaSequencerServiceImpl implements MediaSequencerService {
     private final DisplayWindowRepo displayWindowRepo;
     private final PlayListRepository playListRepository;
     private final SyncRepository syncRepository;
+    private final SimpMessagingTemplate ws;
 
     @Override
     public List<Media> getAllMedia() {
@@ -50,6 +52,9 @@ public class MediaSequencerServiceImpl implements MediaSequencerService {
         Integer pos = playListRepository.findByWindowIdOrderByPositionAsc(window).size();
         Long duration = (request.getDurationInMs() == null || request.getDurationInMs() == 0) ? 30000: request.getDurationInMs();
 
+        ws.convertAndSend("/topic/window/" + window + "/playlist" + getPlayList(window));
+        ws.convertAndSend("/topic/windows", "PLAYLIST_UPDATED");
+
         return new PlayListItems(wind, media, pos, duration);
     }
 
@@ -58,11 +63,11 @@ public class MediaSequencerServiceImpl implements MediaSequencerService {
     public SyncResponse getSyncState() {
         Sync st = syncRepository.findById(1L).orElse(null);
         if (st == null) return new SyncResponse(false, null, null, null);
-        if (st.isActive() && System.currentTimeMillis() >= st.getEndAt()) {
+        if (st.isActive() && System.currentTimeMillis() >= st.getEndsAtEpochMs()) {
             st.setActive(false);
             syncRepository.save(st);
         }
-        return new SyncResponse(st.isActive(), st.getMedia(), st.getStartAt(), st.getEndAt());
+        return new SyncResponse(st.isActive(), st.getMedia(), st.getStartedAtEpochMs(), st.getEndsAtEpochMs());
     }
 
     @Override
@@ -75,9 +80,11 @@ public class MediaSequencerServiceImpl implements MediaSequencerService {
         Sync s = syncRepository.findById(1L).orElseGet(() -> new Sync());
         s.setMedia(media);
         s.setActive(true);
-        s.setStartAt(startTime);
-        s.setEndAt(endTime);
+        s.setStartedAtEpochMs(startTime);
+        s.setEndsAtEpochMs(endTime);
         syncRepository.save(s);
-        return new SyncResponse(true, media, startTime, endTime);
+        SyncResponse output = new SyncResponse(true, media, startTime, endTime);
+        ws.convertAndSend("/topic/sync", output);
+        return output;
     }
 }
