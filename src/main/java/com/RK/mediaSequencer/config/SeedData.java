@@ -16,13 +16,12 @@ public class SeedData {
 
     @Bean
     CommandLineRunner seed(
-        MediaRepository mediaRepo,
-        DisplayWindowRepo windowRepo,
-        PlayListRepository playListRepo
+            MediaRepository mediaRepo,
+            DisplayWindowRepo windowRepo,
+            PlayListRepository playListRepo
 
     ) {
         return args -> {
-            if(mediaRepo.count() > 0 || windowRepo.count() > 0 || playListRepo.count() > 0) return;
             Media m1 = mediaRepo.save(
                     new Media(
                             "[Video] Cloud Computing",
@@ -41,9 +40,9 @@ public class SeedData {
 
             Media m3 = mediaRepo.save(
                     new Media(
-                            "[Video] Programming",
+                            "[Video] Sintel",
                             MediaType.VIDEO,
-                            "https://pixabay.com/videos/download/video-52823_medium.mp4"
+                            "https://test-videos.co.uk/vids/sintel/mp4/h264/720/Sintel_720_10s_2MB.mp4"
                     )
             );
 
