@@ -17,7 +17,7 @@ public class PlayListItems {
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "window_id")
-    private DisplayWindow displayWindow;
+    private DisplayWindow window;
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "media_id")
@@ -30,7 +30,7 @@ public class PlayListItems {
     private Long durationInMs;
 
     public PlayListItems(DisplayWindow displayWindow, Media media, Integer position, Long durationInMs) {
-        this.displayWindow = displayWindow;
+        this.window = displayWindow;
         this.media = media;
         this.position = position;
         this.durationInMs = durationInMs;
