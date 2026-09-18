@@ -74,7 +74,7 @@ public class MediaSequencerServiceImpl implements MediaSequencerService {
     @Transactional
     public SyncResponse startSync(SyncRequest request) {
         Media media = mediaRepository.findById(request.getMediaId()).orElseThrow();
-        Long duration = request.getDurationInMs() == null || request.getDurationInMs() <= 0 ? 30000 : request.getDurationInMs();
+        Long duration = request.getDurationMs() == null || request.getDurationMs() <= 0 ? 10000 : request.getDurationMs();
         Long startTime = System.currentTimeMillis();
         Long endTime = startTime + duration;
         Sync s = syncRepository.findById(1L).orElseGet(() -> new Sync());

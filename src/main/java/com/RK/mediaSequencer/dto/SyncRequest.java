@@ -9,5 +9,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class SyncRequest {
     private Long mediaId;
-    private Long durationInMs;
+    private Long durationMs;
 }

@@ -23,10 +23,37 @@ public class SeedData {
     ) {
         return args -> {
             if(mediaRepo.count() > 0 || windowRepo.count() > 0 || playListRepo.count() > 0) return;
-            Media m1 = mediaRepo.save(new Media("M1-Video", MediaType.VIDEO, "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"));
-            Media m2 = mediaRepo.save(new Media("M2-Image", MediaType.IMAGE, "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=1200"));
-            Media m3 = mediaRepo.save(new Media("M3-Video", MediaType.VIDEO, "https://pixabay.com/videos/download/video-337626_medium.mp4"));
-            Media m4 = mediaRepo.save(new Media("M4-Image", MediaType.IMAGE, "https://images.unsplash.com/photo-1470770841072-f978cf4d019e?w=1200"));
+            Media m1 = mediaRepo.save(
+                    new Media(
+                            "[Video] Cloud Computing",
+                            MediaType.VIDEO,
+                            "https://d2j2uxe7jasn0r.cloudfront.net/watermarks/video/SZe0QQ5rcl2l9mvmt/videoblocks-cloud-computing-server-room_be_9smfxn__fd6eb3af73816eb275d22f8e3e57a703__P360.mp4"
+                    )
+            );
+
+            Media m2 = mediaRepo.save(
+                    new Media(
+                            "Code on Screen",
+                            MediaType.IMAGE,
+                            "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1200"
+                    )
+            );
+
+            Media m3 = mediaRepo.save(
+                    new Media(
+                            "[Video] Programming",
+                            MediaType.VIDEO,
+                            "https://pixabay.com/videos/download/video-52823_medium.mp4"
+                    )
+            );
+
+            Media m4 = mediaRepo.save(
+                    new Media(
+                            "[Image] Database Server",
+                            MediaType.IMAGE,
+                            "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1200"
+                    )
+            );
             Media blank = mediaRepo.save(new Media("Blank", MediaType.BLANK, ""));
 
             DisplayWindow w1 = windowRepo.save(new DisplayWindow("Window 1"));
@@ -34,7 +61,7 @@ public class SeedData {
             DisplayWindow w3 = windowRepo.save(new DisplayWindow("Window 3"));
             DisplayWindow w4 = windowRepo.save(new DisplayWindow("Window 4"));
 
-            Long duration = 60000L;
+            Long duration = 10000L;
 
             playListRepo.save(new PlayListItems(w1, m1, 0, duration));
             playListRepo.save(new PlayListItems(w1, m2, 1, duration));
