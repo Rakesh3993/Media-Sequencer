@@ -22,6 +22,7 @@ public class SeedData {
 
     ) {
         return args -> {
+            if(mediaRepo.count() > 0 || windowRepo.count() > 0 || playListRepo.count() > 0) return;
             Media m1 = mediaRepo.save(
                     new Media(
                             "[Video] Cloud Computing",
