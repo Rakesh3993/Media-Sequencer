@@ -16,7 +16,10 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 
     public void registerStompEndpoints(StompEndpointRegistry r) {
         r.addEndpoint("/ws")
-                .setAllowedOriginPatterns("http://localhost:5173")
+                .setAllowedOriginPatterns(
+                        "http://localhost:5173",
+                        "https://media-sequencer-5vqjiatf8-rk-735a.vercel.app"
+                )
                 .withSockJS();
     }
 }
